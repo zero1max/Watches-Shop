@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+    .product-price {
+        font-weight: bold;
+    }
+    .original-price {
+        text-decoration: line-through;
+        color: grey;
+    }
+    .discount-price {
+        color: red;
+    }
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+    .pagination button {
+        margin: 0 5px;
+        padding: 5px 10px;
+        border: 1px solid #ddd;
+        background-color: #f8f9fa;
+        cursor: pointer;
+    }
+    .pagination button:disabled {
+        cursor: not-allowed;
+        background-color: #e9ecef;
+    }
+</style>
+
+<div class="container mt-5 p-5">
+    <h2 >Search which watches do you want!</h2>
+
+    <form class="d-flex mb-4" role="search" method="get" action="{% url 'search' %}">
+        <input name="q" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" value="{{ request.GET.q }}" style="width: 700px;">
+        <button class="btn btn-success" type="submit">Search</button>
+    </form>    
+
+    {% if results %}
+    <div class="product-section">
+        <div class="container">
+            <div class="row">
+                {% for watch in results %}
+                    {% if watch.is_published %}
+                        <div class="col-12 col-md-3 mb-5 mb-md-0">
+                            <div class="product-item">
+                                <a class="product-item" href="{% url 'detail_url' slug=watch.slug %}">
+                                    <img src="{{ watch.photo.url }}" class="img-fluid product-thumbnail">
+                                    <h3 class="product-title">{{ watch.title }}</h3>
+                                    {% if furniture.discount_percentage %}
+                                        <div class="price-section">
+                                            <span class="original-price">${{ watch.price }}</span> 
+                                            <span class="discount-price">${{ watch.get_discount_price }}</span>
+                                        </div>
+                                    {% else %}
+                                        <strong class="product-price">${{ watch.price }}</strong>
+                                    {% endif %}
+                                </a>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% else %}
+        <p class="p-3">No results found for your query.</p>
+    {% endif %}
+</div>
+{% endblock content %}

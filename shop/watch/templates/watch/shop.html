@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+    .product-price {
+        font-weight: bold;
+    }
+    .original-price {
+        text-decoration: line-through;
+        color: grey;
+    }
+    .discount-price {
+        color: red;
+    }
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+    .pagination button {
+        margin: 0 5px;
+        padding: 5px 10px;
+        border: 1px solid #ddd;
+        background-color: #f8f9fa;
+        cursor: pointer;
+    }
+    .pagination button:disabled {
+        cursor: not-allowed;
+        background-color: #e9ecef;
+    }
+</style>
+<div class="container py-5">
+    <div class="row">
+            {% for watch in page_obj %}
+                {% if  watch.is_published %}
+                        <div class="col-md-4">
+                            <div class="card mb-4 product-wap rounded-0">
+                                <div class="card rounded-0">
+                                    <img class="card-img rounded-0 img-fluid" src="{{ watch.photo.url }}">
+                                    <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+                                        <ul class="list-unstyled">
+                                        
+                                            <li><a class="btn btn-success text-white mt-2" href="{% url 'detail_url' slug=watch.slug %}"><i class="fas fa-cart-plus"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <a href="#!" class="h3 text-decoration-none">{{ watch.title|truncatewords:5 }}</a>
+                                    <br>
+                                    {% if furniture.discount_percentage %}
+                                    <div class="price-section">
+                                        <span class="original-price">${{ watch.price }}</span> 
+                                        <span class="discount-price">${{ watch.get_discount_price }}</span>
+                                    </div>
+                                    {% else %}
+                                        <strong class="product-price">${{ watch.price }}</strong>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                {% endif %}
+            {% endfor %}
+            <div class="pagination">
+                {% if page_obj.has_previous %}
+                    <form action="" method="get" style="display:inline;">
+                        <input type="hidden" name="page" value="1">
+                        <button type="submit">&laquo; First</button>
+                    </form>
+                    <form action="" method="get" style="display:inline;">
+                        <input type="hidden" name="page" value="{{ page_obj.previous_page_number }}">
+                        <button type="submit">Previous</button>
+                    </form>
+                {% else %}
+                    <button type="button" disabled>&laquo; First</button>
+                    <button type="button" disabled>Previous</button>
+                {% endif %}
+    
+                <span class="current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+    
+                {% if page_obj.has_next %}
+                    <form action="" method="get" style="display:inline;">
+                        <input type="hidden" name="page" value="{{ page_obj.next_page_number }}">
+                        <button type="submit">Next</button>
+                    </form>
+                    <form action="" method="get" style="display:inline;">
+                        <input type="hidden" name="page" value="{{ page_obj.paginator.num_pages }}">
+                        <button type="submit">Last &raquo;</button>
+                    </form>
+                {% else %}
+                    <button type="button" disabled>Next</button>
+                    <button type="button" disabled>Last &raquo;</button>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- End Content -->
+
+{% endblock content %}

@@ -1,0 +1,170 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>IboWatches</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="{% static 'assets/img/apple-icon.png' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/templatemo.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/custom.css' %}">
+
+    <!-- Load fonts style after rendering the layout styles -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.min.css' %}">
+</head>
+
+<body>
+
+
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-light shadow">
+        <div class="container d-flex justify-content-between align-items-center">
+
+            <a class="navbar-brand text-success logo h1 align-self-center" href="{% url 'home' %}">
+                IboWatches
+            </a>
+
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="templatemo_main_nav">
+                <div class="flex-fill">
+                    <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'home' %}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'news' %}">News</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'shop' %}">Shop</a>
+                        </li>
+                        
+                        {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'watches' %}">Watches(API)</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}">LOGOUT</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="navbar align-self-center d-flex">
+                   
+                        <a class="nav-link" href="{% url 'search' %}"><i class="fa fa-fw fa-search text-dark mr-3"></i></a>
+                        
+                    
+                    {% if request.user.is_authenticated %}
+                    <a class="nav-icon position-relative text-decoration-none" href="{% url 'cart' %}">
+                        <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
+                    </a>
+                    {% endif %}
+                    
+                    {% if not request.user.is_authenticated %}
+                    <a class="nav-icon position-relative text-decoration-none" href="{% url 'login' %}">
+                        <i class="fa fa-fw fa-user text-dark mr-3"></i>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+    </nav>
+    <!-- Close Header -->
+
+   {% block content %}
+   {% endblock content %}
+
+    <!-- Start Footer -->
+    <footer class="bg-dark" id="tempaltemo_footer">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-4 pt-5">
+                    <h2 class="h2 text-success border-bottom pb-3 border-light logo">IboWatches</h2>
+                    <ul class="list-unstyled text-light footer-link-list">
+                        <li>
+                            <i class="fas fa-map-marker-alt fa-fw"></i>
+                            New Life district 9
+                        </li>
+                        <li>
+                            <i class="fa fa-phone fa-fw"></i>
+                            <a class="text-decoration-none" href="tel:+99833125****">+99833125****</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+
+               
+
+                <div class="col-md-4 pt-5">
+                    <h2 class="h2 text-light border-bottom pb-3 border-light">Info</h2>
+                    <ul class="list-unstyled text-light footer-link-list">
+                        <li><a class="text-decoration-none" href="{% url 'home' %}">Home</a></li>
+                        <li><a class="text-decoration-none" href="#">About Us</a></li>
+                        <li><a class="text-decoration-none" href="#">Shop Locations</a></li>
+                        <li><a class="text-decoration-none" href="#">FAQs</a></li>
+                        <li><a class="text-decoration-none" href="#">Contact</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="row text-light mb-4">
+                <div class="col-12 mb-3">
+                    <div class="w-100 my-3 border-top border-light"></div>
+                </div>
+                <div class="col-auto me-auto">
+                    <ul class="list-inline text-left footer-icons">
+                        <li class="list-inline-item border border-light rounded-circle text-center">
+                            <a class="text-light text-decoration-none" target="_blank" href="http://facebook.com/"><i class="fab fa-facebook-f fa-lg fa-fw"></i></a>
+                        </li>
+                        <li class="list-inline-item border border-light rounded-circle text-center">
+                            <a class="text-light text-decoration-none" target="_blank" href="https://www.instagram.com/"><i class="fab fa-instagram fa-lg fa-fw"></i></a>
+                        </li>
+                        <li class="list-inline-item border border-light rounded-circle text-center">
+                            <a class="text-light text-decoration-none" target="_blank" href="https://twitter.com/"><i class="fab fa-twitter fa-lg fa-fw"></i></a>
+                        </li>
+                        <li class="list-inline-item border border-light rounded-circle text-center">
+                            <a class="text-light text-decoration-none" target="_blank" href="https://www.linkedin.com/"><i class="fab fa-linkedin fa-lg fa-fw"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="w-100 bg-black py-3">
+            <div class="container">
+                <div class="row pt-2">
+                    <div class="col-12">
+                        <p class="text-left text-light">
+                            Copyright &copy; 2024 All Rights Resirved.
+                            | Designed loved by <a rel="sponsored" href="https://www.instagram.com/kilicevv_i/" target="_blank">Ibrohim<a rel="sponsored" href="https://www.instagram.com/zero.1.max/" target="_blank"> & zero1max</a></a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+    <!-- End Footer -->
+
+    <!-- Start Script -->
+    <script src="{% static 'assets/js/jquery-1.11.0.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery-migrate-1.2.1.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/templatemo.js' %}"></script>
+    <script src="{% static 'assets/js/custom.js' %}"></script>
+    <!-- End Script -->
+</body>
+
+</html>

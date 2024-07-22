@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+    .product-price {
+        font-weight: bold;
+    }
+    .original-price {
+        text-decoration: line-through;
+        color: grey;
+    }
+    .discount-price {
+        color: red;
+    }
+</style>
+<section class="bg-light">
+    <div class="container pb-5">
+        <div class="row">
+            <div class="col-lg-5 mt-5">
+                <div class="card mb-3">
+                    {% if watch.photo %}
+                        <img class="card-img img-fluid" src="{{ watch.photo.url }}" alt="Card image cap" id="product-detail">
+                    {% endif %}
+                </div>
+            </div>
+            <!-- col end -->
+            <div class="col-lg-7 mt-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="h2">{{ watch.title }}</h1>
+                        {% if furniture.discount_percentage %}
+                            <div class="price-section">
+                                <span class="original-price">${{ watch.price }}</span> 
+                                <strong><h3 class="discount-price">${{ watch.get_discount_price }}</h3></strong>
+                            </div>
+                        {% else %}
+                            <strong><h3 class="product-price">${{ watch.price }}</h3></strong>
+                        {% endif %}
+                        <ul class="list-inline">
+                            <li class="list-inline-item">
+                                <h6>Brand:</h6>
+                            </li>
+                            <li class="list-inline-item">
+                                <p class="text-muted"><strong>{{ watch.brand }}</strong></p>
+                            </li>
+                        </ul>
+
+                        <h6>Description:</h6>
+                        <p>{{ watch.description }}</p>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-center pb-3">
+                                {% if watch.quantity > 0 %}
+                                    {% if request.user.is_authenticated %}
+                                        <a href="{% url 'to_cart' watch.pk 'add' %}" class="btn btn-success">Add to Cart</a>
+                                    {% else %}
+                                        <a href="{% url 'login' %}" class="btn btn-secondary">Login to Add to Cart</a>
+                                    {% endif %}
+                                {% else %}
+                                    <a href="{% url 'shop' %}" class="btn btn-danger">Mahsulot tugagan!</a>
+                                {% endif %}
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+

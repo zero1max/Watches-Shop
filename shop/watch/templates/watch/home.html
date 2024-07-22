@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+ <!-- Modal -->
+ <div class="modal fade bg-white" id="templatemo_search" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="w-100 pt-1 mb-5 text-right">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="" method="get" class="modal-content modal-body border-0 p-0">
+            <div class="input-group mb-2">
+                <input type="text" class="form-control" id="inputModalSearch" name="q" placeholder="Search ...">
+                <button type="submit" class="input-group-text bg-success text-light">
+                    <i class="fa fa-fw fa-search text-white"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<!-- Start Banner Hero -->
+<div id="template-mo-zay-hero-carousel" class="carousel slide" data-bs-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="0" class="active"></li>
+        <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="1"></li>
+        <li data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <div class="container">
+                <div class="row p-5">
+                    <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+                        <img class="img-fluid" src="{% static 'assets/img/slider1.png' %}" alt="">
+                    </div>
+                    <div class="col-lg-6 mb-0 d-flex align-items-center">
+                        <div class="text-align-left align-self-center">
+                            <h1 class="h1 text-success"><b>Very Smart</b> Watches</h1>
+                            <h3 class="h2">Lorem ipsum dolor sit amet.</h3>
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eos illo non a quos molestiae laborum sed laboriosam labore nemo dolorem repellendus suscipit, architecto laudantium quas recusandae excepturi commodi eum praesentium nobis, quisquam quo! Quos nobis illum numquam commodi, molestias aliquam repudiandae quae et ullam modi assumenda consequuntur velit minima architecto!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div class="container">
+                <div class="row p-5">
+                    <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+                        <img class="img-fluid" src="{% static 'assets/img/slider2.webp' %}" alt="">
+                    </div>
+                    <div class="col-lg-6 mb-0 d-flex align-items-center">
+                        <div class="text-align-left">
+                            <h1 class="h1 text-success"><b>Original</b> Mechanical Watches</h1>
+                            <h3 class="h2">Lorem ipsum dolor sit amet.</h3>
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eos illo non a quos molestiae laborum sed laboriosam labore nemo dolorem repellendus suscipit, architecto laudantium quas recusandae excepturi commodi eum praesentium nobis, quisquam quo! Quos nobis illum numquam commodi, molestias aliquam repudiandae quae et ullam modi assumenda consequuntur velit minima architecto!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div class="container">
+                <div class="row p-5">
+                    <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+                        <img class="img-fluid" src="{% static '/assets/img/slider3.png' %}" alt="">
+                    </div>
+                    <div class="col-lg-6 mb-0 d-flex align-items-center">
+                        <div class="text-align-left">
+                            <h1 class="h1 text-success"><b>Very Powerful</b> Sport Watches</h1>
+                            <h3 class="h2">Lorem ipsum dolor sit amet.</h3>
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eos illo non a quos molestiae laborum sed laboriosam labore nemo dolorem repellendus suscipit, architecto laudantium quas recusandae excepturi commodi eum praesentium nobis, quisquam quo! Quos nobis illum numquam commodi, molestias aliquam repudiandae quae et ullam modi assumenda consequuntur velit minima architecto!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="carousel-control-prev text-decoration-none w-auto ps-3" href="#template-mo-zay-hero-carousel" role="button" data-bs-slide="prev">
+        <i class="fas fa-chevron-left"></i>
+    </a>
+    <a class="carousel-control-next text-decoration-none w-auto pe-3" href="#template-mo-zay-hero-carousel" role="button" data-bs-slide="next">
+        <i class="fas fa-chevron-right"></i>
+    </a>
+</div>
+<!-- End Banner Hero -->
+
+
+<!-- Start Categories of The Month -->
+<section class="container py-5">
+    <div class="row text-center pt-3">
+        <div class="col-lg-6 m-auto">
+            <h1 class="h1">Which models you can find?</h1>
+            <p>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum eos repudiandae dolorem deleniti? Nam necessitatibus sequi minus repellendus assumenda alias dicta dolorum itaque neque?
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-4 p-5 mt-3">
+            <a href="{% url 'shop' %}?category=1"><img src="{% static 'assets/img/jacob1.jpg' %}" class="rounded-circle img-fluid border"></a>
+            <h5 class="text-center mt-3 mb-3">Mechanical Watches</h5>
+            <p class="text-center"><a href="{% url 'shop' %}?category=1" class="btn btn-success">Go Shop</a></p>
+        </div>
+        <div class="col-12 col-md-4 p-5 mt-3">
+            <a href="{% url 'shop' %}?category=2"><img src="{% static 'assets/img/sport1.jpg' %}" class="rounded-circle img-fluid border"></a>
+            <h2 class="h5 text-center mt-3 mb-3">Sport Watches</h2>
+            <p class="text-center"><a href="{% url 'shop' %}?category=2" class="btn btn-success">Go Shop</a></p>
+        </div>
+        <div class="col-12 col-md-4 p-5 mt-3">
+            <a href="{% url 'shop' %}?category=3"><img src="{% static 'assets/img/apple2.jpg' %}" class="rounded-circle img-fluid border"></a>
+            <h2 class="h5 text-center mt-3 mb-3">Smart Watches</h2>
+            <p class="text-center"><a href="{% url 'shop' %}?category=3" class="btn btn-success">Go Shop</a></p>
+        </div>
+    </div>
+</section>
+
+<!-- End Categories of The Month -->
+
+
+<!-- Start Featured Product -->
+<section class="bg-light">
+    <div class="container py-5">
+        <div class="row text-center py-3">
+            <div class="col-lg-6 m-auto">
+                <h1 class="h1">News</h1>
+                <p>
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            {% for new in news %}
+                {% if new.is_published %}
+                        <div class="col-12 col-md-4 mb-4">
+                            <div class="card h-100">
+                                <a href="{% url 'news' %}">
+                                    <img src="{{ new.photo.url }}" class="card-img-top" alt="...">
+                                </a>
+                                <div class="card-body">
+                                    <a href="{% url 'news' %}" class="h2 text-decoration-none text-dark">{{ new.title|truncatewords:5 }}</a>
+                                    <p class="card-text">
+                                        {{ new.description }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- End Featured Product -->
+
+
+{% endblock content %}

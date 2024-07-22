@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="untree_co-section before-footer-section p-5">
+  <div class="container p-1">
+    <div class="row mb-5">
+      <form class="col-md-12" method="post">
+        <div class="site-blocks-table">
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="product-thumbnail">Image</th>
+                <th class="product-name">Product</th>
+                <th class="product-price">Price</th>
+                <th class="product-quantity">Quantity</th>
+                <th class="product-total">Total</th>
+                <th class="product-remove">Remove</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for product in products %}
+              <tr>
+                <td class="product-thumbnail">
+                  <img src="{{product.product.photo.url}}" alt="{{product.product.title}}" class="img-fluid" width="250px">
+                </td>
+                <td class="product-name">
+                  <h2 class="h5 text-black">{{product.product.title}}</h2>
+                </td>
+                <td>${{product.product.price}}</td>
+                <td>
+                  <div class="input-group mb-3 d-flex align-items-center quantity-container" style="max-width: 120px;">
+                    {% if 'cart' in request.path %}
+                      <div class="d-flex">
+                          <a href="{% url 'to_cart' product.product.pk 'add' %}">
+                              <img src="{% static 'assets/img/add_icon.svg' %}" />
+                          </a>
+                          <p>{{product.quantity}}</p>
+                          <a href="{% url 'to_cart' product.product.pk 'remove' %}">
+                              <img src="{% static 'assets/img/remove_icon.svg' %}" />
+                          </a>
+                      </div>
+                    {% endif %}
+                  </div>
+                </td>
+                <td>${{product.get_total_price}}</td>
+                <td><a href="{% url 'to_cart' product.product.pk 'remove' %}" class="btn btn-black btn-sm">X</a></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </form>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row mb-5">
+          <div class="col-md-6 mb-3 mb-md-0">
+            <a href="{% url 'checkout' %}" class="btn btn-success btn-sm btn-block">Ordering</a>
+          </div>
+          <div class="col-md-6">
+            <a href="{% url 'shop' %}" class="btn btn-success btn-sm btn-block">Continue Shopping</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 pl-5">
+        <div class="row justify-content-end">
+          <div class="col-md-7">
+            <div class="row">
+              <div class="col-md-12 text-right border-bottom mb-5">
+                <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <span class="text-black">Total Quantity</span>
+              </div>
+              <div class="col-md-6 text-right">
+                <strong class="text-black">{{order.get_cart_total_quantity}}</strong>
+              </div>
+            </div>
+            <div class="row mb-5">
+              <div class="col-md-6">
+                <span class="text-black">Total Price</span>
+              </div>
+              <div class="col-md-6 text-right">
+                <strong class="text-black">${{order.get_cart_total_price}}</strong>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <a href="{% url 'checkout' %}"><button class="btn btn-success btn-lg py-3 btn-block">Proceed To Checkout</button></a>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-md-12 text-center">
+                <a href="{% url 'clear_cart' %}" class="btn btn-danger btn-lg py-3">Clear Cart</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

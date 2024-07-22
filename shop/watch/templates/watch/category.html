@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container-fluid populer-news py-5">
+    <div class="container py-5">
+        <div class="tab-class mb-4">
+            <div class="row g-4">
+                <div class="col-lg-8 col-xl-9">
+                    <div class="mt-5 lifestyle">
+                        <div class="border-bottom mb-4">
+                            <h1 class="mb-4">{{ category }}</h1>
+                        </div>
+                        <div class="row row-cols-1 row-cols-md-3 g-4">
+                            {% for item in categories %}
+                                {% if item.is_published %}
+                                    <div class="col">
+                                        <div class="card">
+                                            {% if item.photo %}
+                                                <img src="{{ item.photo.url }}" class="card-img-top" alt="...">
+                                            {% endif %}
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{ item.title }}</h5>
+                                                <p class="card-text">{{ item.content|truncatewords:4 }}</p>
+                                            </div>
+                                            <a href="{% url 'detail_url' item.pk %}" class="btn btn-primary">Read more...</a>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Most Populer News End -->
+
+{% endblock content %}

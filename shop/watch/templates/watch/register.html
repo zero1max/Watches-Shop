@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+    .registration {
+        max-width: 400px;
+        margin: 50px auto 50px auto; /* Yuqori 50px, pastda 50px bo'lishi */
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .registration header {
+        text-align: center;
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .registration form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .registration form input[type="text"],
+    .registration form input[type="password"] {
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        font-size: 14px;
+    }
+
+    .registration form input[type="submit"] {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .registration form input[type="submit"]:hover {
+        background-color: #218838;
+    }
+
+    .signup {
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .signup a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .signup a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="container">
+    <div class="registration">
+        <header>Signup</header>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" class="button" value="Signup">
+        </form>
+        <div class="signup">
+            <span>Already have an account? <a href="{% url 'login' %}">Login</a></span>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
