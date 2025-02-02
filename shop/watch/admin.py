@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Watches, News, Category
 from django.utils.html import format_html
+from .models import Watches, News, Category
 
-# Register your models here.
+
 class WatchesAdmin(admin.ModelAdmin):
     list_display = ['id', 'title', 'price', 'get_discount_price', 'quantity','category', 'created_at', 'updated_at', 'is_published', 'photo_tag']
     list_display_links = ['id', 'title']
@@ -22,6 +22,7 @@ class WatchesAdmin(admin.ModelAdmin):
         return obj.get_discount_price()
     get_discount_price.short_description = 'Discount Price'
 
+
 class NewsAdmin(admin.ModelAdmin):
     list_display = ['id', 'title', 'slug', 'is_published', 'photo_tag']
     list_editable = ['is_published']
@@ -33,6 +34,7 @@ class NewsAdmin(admin.ModelAdmin):
         else:
             return format_html('-')
     photo_tag.short_description = 'Photo'
+
 
 admin.site.register(Watches, WatchesAdmin)
 admin.site.register(Category)

@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+#
 from .models import Watches, Category, ShippingAddress, Customer
 
 class UserRegisterForm(UserCreationForm):
@@ -30,6 +31,7 @@ class FurnitureModelForm(forms.ModelForm):
             'photo': forms.ClearableFileInput(attrs={'class': 'form-control'}),
         }
 
+
 class CustomerForm(forms.ModelForm):
     class Meta:
         model = Customer
@@ -44,6 +46,7 @@ class CustomerForm(forms.ModelForm):
                 'placeholder':"Your email"
             }),
         }
+
 
 class ShippingAddressForm(forms.ModelForm):
     class Meta:
