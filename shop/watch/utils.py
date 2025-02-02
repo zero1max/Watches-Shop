@@ -1,5 +1,7 @@
-from .models import Customer, Order, Watches, OrderProduct
 from django.contrib import messages
+#
+from .models import Customer, Order, Watches, OrderProduct
+
 
 class CartForAuthenticatedUser:
     def __init__(self, request, product_id=None, action=None):
@@ -48,6 +50,7 @@ class CartForAuthenticatedUser:
 
         if order_product.quantity <= 0:
             order_product.delete()
+
 
 def get_cart_data(request):
     cart_info = {

@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.text import slugify
 from django.contrib.auth.models import User
 
-# Create your models here.
+
 class Watches(models.Model):
     title = models.CharField(max_length=155, verbose_name='Sarlavha')
     slug = models.SlugField(blank=True, unique=True)
@@ -31,13 +31,15 @@ class Watches(models.Model):
 
     def __str__(self) -> str:
         return self.title
-    
+
+
 class Category(models.Model):
     title = models.CharField(max_length=155, verbose_name="Kategoriya")
 
     def __str__(self) -> str:
         return self.title
-    
+
+
 class News(models.Model):
     title = models.CharField(max_length=155, verbose_name='Sarlavha')
     slug = models.SlugField(blank=True, unique=True)
@@ -54,7 +56,8 @@ class News(models.Model):
 
     def __str__(self) -> str:
         return self.title
-    
+
+
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.SET_NULL, blank=True, null=True)
     name = models.CharField(max_length=255)
@@ -66,6 +69,7 @@ class Customer(models.Model):
     class Meta:
         verbose_name = "Customer"
         verbose_name_plural = "Customers"
+
 
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)

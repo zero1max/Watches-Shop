@@ -4,17 +4,20 @@ from django.urls import reverse_lazy
 from django.contrib.auth import login, logout
 from django.contrib.auth.views import LoginView
 from django.contrib import messages
-from .forms import UserRegisterForm, UserLoginForm, FurnitureModelForm, ShippingAddressForm, CustomerForm
-from .models import Watches, Category, News, Customer, Order
-from .serializers import WatchesSerializer
-import random
-from .utils import get_cart_data, CartForAuthenticatedUser
 from django.conf import settings
 from django.utils.text import slugify
 from django.core.paginator import Paginator
+#
+from .forms import UserRegisterForm, UserLoginForm, FurnitureModelForm, ShippingAddressForm, CustomerForm
+from .models import Watches, Category, News, Customer, Order
+from .serializers import WatchesSerializer
+from .utils import get_cart_data, CartForAuthenticatedUser
+#
+import random
+import stripe
+#
 from rest_framework.generics import ListAPIView, RetrieveUpdateDestroyAPIView
 
-import stripe
 
 class RegisterView(CreateView):
     form_class = UserRegisterForm
@@ -29,7 +32,8 @@ class RegisterView(CreateView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Signup'
         return context
-    
+
+
 class CustomLoginView(LoginView):
     form_class = UserLoginForm
     template_name = 'watch/login.html'
@@ -94,13 +98,16 @@ def search(request):
     }
     return render(request, 'watch/search.html', context)
 
+
 class WatchesView(ListAPIView):
     queryset = Watches.objects.all()
     serializer_class = WatchesSerializer
 
+
 class WatchesViewCRUD(RetrieveUpdateDestroyAPIView):
     queryset = Watches.objects.all()
     serializer_class = WatchesSerializer
+
 
 class WatchesDetailView(DetailView):
     model = Watches
@@ -116,6 +123,7 @@ class WatchesDetailView(DetailView):
         context['title'] = 'Watch Detail'
         return context
 
+
 class CategoryView(DetailView):
     model = Category
     template_name = 'watch/category.html'
@@ -126,7 +134,8 @@ class CategoryView(DetailView):
         context['watches'] = Watches.objects.filter(category_id=self.kwargs['pk'])
         context['categories'] = Category.objects.all()
         return context
-    
+
+
 class NewsView(ListView):
     model = News
     template_name = 'watch/news.html'
@@ -136,7 +145,8 @@ class NewsView(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'News'
         return context
-    
+
+
 class NewsDetailView(DetailView):
     model = News
     template_name = 'watch/news_detail.html'
@@ -150,6 +160,7 @@ class NewsDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'News Detail'
         return context
+  
     
 def cart(request):
     cart_info = get_cart_data(request)

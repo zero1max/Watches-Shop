@@ -1,4 +1,5 @@
 from django.urls import path
+#
 from .views import RegisterView, CustomLoginView, user_logout, home,\
     shop, search, WatchesView, WatchesViewCRUD, WatchesDetailView, CategoryView,\
     NewsView, NewsDetailView, cart, to_cart, checkout, payment, payment_success, clear_cart
